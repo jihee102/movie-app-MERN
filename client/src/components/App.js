@@ -1,27 +1,36 @@
-import React from 'react';
-import {BrowserRouter as Router, Route, Switch, Link} from 'react-router-dom'
-import AboutPage from './about'
-import LandingPage from './LandingPage/LandingPage'
-import LoginPage from './LoginPage/LoginPage';
-import RegisterPage from './RegisterPage/RegisterPage'
-import Auth from '../hoc/auth'
+import React, { Suspense } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import Auth from '../hoc/auth';
+// pages for this product
+import LandingPage from './views/LandingPage/LandingPage.js';
+import LoginPage from './views/LoginPage/LoginPage.js';
+import RegisterPage from './views/RegisterPage/RegisterPage.js';
+import MovieDetailPage from './views/MovieDetailPage/MovieDetailPage.js';
+import NavBar from './views/NavBar/NavBar';
+import Footer from './views/Footer/Footer';
 
- 
+//null   Anyone Can go inside
+//true   only logged in user can go inside
+//false  logged in user can't go inside
+
 function App() {
   return (
-    <Router>
-        <div className="App">
-
-            <Switch>
-              {/* <Route path="/" component={Home} /> */}
-              <Route exact path="/" component={Auth(LandingPage, null )} />
-              <Route exact path="/about" component={Auth(AboutPage, null )} /> 
-              <Route exact path="/login" component={Auth(LoginPage, false )} /> 
-              <Route export path ="/register" component={Auth(RegisterPage, false )} />
-            </Switch>
-        
-        </div>
-      </Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <NavBar />
+      <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
+        <Switch>
+          <Route exact path='/' component={Auth(LandingPage, null)} />
+          <Route exact path='/login' component={Auth(LoginPage, false)} />
+          <Route exact path='/register' component={Auth(RegisterPage, false)} />
+          <Route
+            exact
+            path='/movie/:movieId'
+            component={Auth(MovieDetailPage, null)}
+          />
+        </Switch>
+      </div>
+      <Footer />
+    </Suspense>
   );
 }
 
