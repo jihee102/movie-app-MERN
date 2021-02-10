@@ -4,6 +4,7 @@ import MainImage from '../common/MainImage';
 import MovieInfo from './section/MovieInfo';
 import { Row } from 'antd';
 import GridCard from '../common/GridCard';
+import Favorite from './section/Favorite';
 
 function MovieDetailPage(props) {
   // get movie id from the url
@@ -41,6 +42,14 @@ function MovieDetailPage(props) {
 
       {/* Body */}
       <div className='movie_detail_box'>
+        <div className='favorite_box'>
+          <Favorite
+            movie={Movie}
+            movieId={movieId}
+            user={localStorage.getItem('userId')}
+          />
+        </div>
+
         {/* Movie Info */}
         <MovieInfo movie={Movie} />
         <br />

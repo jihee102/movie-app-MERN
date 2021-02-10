@@ -1,5 +1,6 @@
 //SERVER ROUTES
 export const USER_SERVER = '/api/users';
+export const FAVORITE_SERVER = '/api/favorite';
 
 export const API_KEY = '6b74b62b17eacaed92e656a2e91290cc';
 
