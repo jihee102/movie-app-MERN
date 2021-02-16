@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import './favorite.css';
 import axios from 'axios';
-import { FAVORITE_SERVER } from '../../Config';
+import { FAVORITE_SERVER, IMG_URL } from '../../Config';
+import { Popover } from 'antd';
 
 function FavoritePage() {
   const [Favorite, setFavorite] = useState([]);
 
   useEffect(() => {
+    fetchFavorite();
+  }, []);
+
+  const fetchFavorite = () => {
     axios
       .post(`${FAVORITE_SERVER}/getFavoritedMovie`, {
         user: localStorage.getItem('userId'),
@@ -19,7 +24,46 @@ function FavoritePage() {
           alert('Fail to load favorite movies');
         }
       });
-  }, []);
+  };
+
+  const removeFavorite = (movieId, user) => {
+    axios
+      .post(`${FAVORITE_SERVER}/removeFavorite`, { user, movieId })
+      .then((response) => {
+        if (response.data.success) {
+          fetchFavorite();
+        } else {
+          alert('Fail to delete favorite movies');
+        }
+      });
+  };
+
+  const renderCards = Favorite.map((favorite, index) => {
+    return (
+      <tr key={index}>
+        <Popover
+          content={
+            favorite.moviePost ? (
+              <img src={`${IMG_URL}w500${favorite.moviePost}`} />
+            ) : (
+              'No image'
+            )
+          }
+          title={`${favorite.movieTitle}`}
+        >
+          <td>{favorite.movieTitle}</td>
+        </Popover>
+        <td>{favorite.movieRunTime} mins</td>
+        <td>
+          <button
+            onClick={() => removeFavorite(favorite.movieId, favorite.user)}
+          >
+            Remove
+          </button>
+        </td>
+      </tr>
+    );
+  });
 
   return (
     <div className='favorite_list'>
@@ -34,20 +78,9 @@ function FavoritePage() {
             <th>Removie from favorites</th>
           </tr>
         </thead>
-        <tbody>
-          {Favorite.map((favorite, index) => (
-            <tr key={index}>
-              <td>{favorite.movieTitle}</td>
-              <td>{favorite.movieRunTime} mins</td>
-              <td>
-                <button>Remove</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <tbody>{renderCards}</tbody>
       </table>
     </div>
   );
 }
-
 export default FavoritePage;
