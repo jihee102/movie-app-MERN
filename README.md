@@ -1,6 +1,16 @@
-To use this application,
+# Movie-app-Mern
 
-1. make dev.js file inside config folder
-2. put mongoDB info into dev.js file
-3. Type " npm install " inside the root directory ( Download Server Dependencies )
-4. Type " npm install " inside the client directory ( Download Front-end Dependencies )
+Simple new released movies site where user can see movie infromation.
+The web project is built on the React framework.
+
+## Getting started
+
+```bash
+npm install
+npm run dev
+```
+
+
+## Live Demo
+
+
