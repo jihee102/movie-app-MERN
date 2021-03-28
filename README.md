@@ -1,6 +1,6 @@
 # Movie-app-Mern
 
-Simple new released movies site where user can see movie infromation.
+Simple new released movies site where user can see movie information.
 The web project is built on the React framework.
 
 ## Getting started
