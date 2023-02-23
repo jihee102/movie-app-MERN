@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './favorite.css';
 import axios from 'axios';
-import { FAVORITE_SERVER, IMG_URL } from '../../Config';
+import { FAVORITE_SERVER } from '../../Config';
 import { Popover } from 'antd';
 
 function FavoritePage() {
@@ -10,6 +10,7 @@ function FavoritePage() {
   useEffect(() => {
     fetchFavorite();
   }, []);
+  const IMG_URL = process.env.REACT_APP_IMG_URL;
 
   const fetchFavorite = () => {
     axios

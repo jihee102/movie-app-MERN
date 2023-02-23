@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FaCode } from 'react-icons/fa';
-import { API_URL, API_KEY, IMG_URL } from '../../Config';
+import {} from '../../Config';
 import { Typography, Row } from 'antd';
 import MainImage from '../common/MainImage';
 import GridCard from '../common/GridCard';
@@ -13,6 +13,10 @@ function LandingPage() {
   useEffect(() => {
     fetchMovies(1);
   }, []);
+
+  const API_URL = process.env.REACT_APP_API_URL;
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  const IMG_URL = process.env.REACT_APP_IMG_URL;
 
   const fetchMovies = (path) => {
     fetch(

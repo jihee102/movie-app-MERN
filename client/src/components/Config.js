@@ -1,9 +1,9 @@
 //SERVER ROUTES
-export const USER_SERVER = '/api/users';
-export const FAVORITE_SERVER = '/api/favorite';
-
-export const API_KEY = '6b74b62b17eacaed92e656a2e91290cc';
-
-export const API_URL = 'https://api.themoviedb.org/3/';
-
-export const IMG_URL = 'https://image.tmdb.org/t/p/';
+export const USER_SERVER =
+  process.env.NODE_ENV === 'production'
+    ? 'https://movie-app-mern.onrender.com' + '/api/user'
+    : 'http://localhost:5000' + '/api/user';
+export const FAVORITE_SERVER =
+  process.env.NODE_ENV === 'production'
+    ? 'https://movie-app-mern.onrender.com' + '/api/favorite'
+    : 'http://localhost:5000' + '/api/favorite';

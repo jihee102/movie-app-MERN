@@ -17,6 +17,7 @@ const config = require('./config/key');
 const mongoose = require('mongoose');
 const connect = mongoose
   .connect(config.mongoURI, {
+    dbName: 'movie-app',
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

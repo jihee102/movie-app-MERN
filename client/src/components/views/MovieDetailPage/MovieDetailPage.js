@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { API_URL, API_KEY, IMG_URL } from '../../Config';
 import MainImage from '../common/MainImage';
 import MovieInfo from './section/MovieInfo';
 import { Row } from 'antd';
@@ -12,7 +11,9 @@ function MovieDetailPage(props) {
   const [Movie, setMovie] = useState([]);
   const [Crews, setCrews] = useState([]);
   const [ActorToggle, setActorToggle] = useState(false);
-
+  const API_URL = process.env.REACT_APP_API_URL;
+  const API_KEY = process.env.REACT_APP_API_KEY;
+  const IMG_URL = process.env.REACT_APP_IMG_URL;
   useEffect(() => {
     fetch(`${API_URL}movie/${movieId}?api_key=${API_KEY}`)
       .then((response) => response.json())
